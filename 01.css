@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#wrap {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  margin: 200px auto 0;
+}
+#banner {
+  position: absolute;
+  width: 2800px;
+  height: 200px;
+  transition: left 0.3s;
+}
+#banner img {
+  float: left;
+  width: 400px;
+  height: 200px;
+}
+
+.btn .prev {
+  display: none;
+  width: 20px;
+  line-height: 40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  left: 0px;
+  text-align: center;
+  border-radius: 0px 40px 40px 0px;
+  background-color: RGBA(0, 0, 0, 0.3);
+  color: white;
+  cursor: pointer;
+}
+.btn .next {
+  display: none;
+  width: 20px;
+  line-height: 40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  right: 0px;
+  text-align: center;
+  border-radius: 40px 0px 0px 40px;
+  background-color: RGBA(0, 0, 0, 0.3);
+  color: white;
+  cursor: pointer;
+}
+.btn i:hover {
+  background-color: RGBA(0, 0, 0, 0.7);
+}
+/* #wrap:hover .btn i{
+    display: block;
+} */
+.tips {
+  position: absolute;
+  left: 50%;
+  margin-left: -53px;
+  bottom: 0;
+  margin-bottom: 20px;
+  z-index: 10;
+}
+.tips ul li {
+  float: left;
+  margin-left: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: RGBA(0, 0, 0, 0.3);
+  list-style: none;
+  cursor: pointer;
+}
+.tips .on {
+  background: white;
+}

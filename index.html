@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://at.alicdn.com/t/font_1665286_vg9poogoxv.css"
+    />
+    <link rel="stylesheet" href="./01.css" />
+    <title>轮播图</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="banner" style="left: 0;">
+        <img class="img" src="./未标题-1.jpg" alt="" />
+        <img class="img" src="./未标题-2.jpg" alt="" />
+        <img class="img" src="./未标题-3.jpg" alt="" />
+        <img class="img" src="./未标题-4.jpg" alt="" />
+        <img class="img" src="./未标题-5.jpg" alt="" />
+      </div>
+      <div class="btn">
+        <i class="prev iconfont icon-jiantou"></i>
+        <i class="next iconfont icon-arrow-right"></i>
+      </div>
+      <div class="tips">
+        <ul>
+          <li class="on"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    var wrap = document.getElementById("wrap");
+    var banner = document.getElementById("banner");
+    var btn = document.body.getElementsByClassName("btn")[0];
+    var prev = document.body.getElementsByClassName("prev")[0];
+    var next = document.body.getElementsByClassName("next")[0];
+    var lis = document.body.getElementsByTagName("li");
+    var images = document.querySelectorAll(".img");
+    var index = 0;
+    //切换上一张图片
+    prev.onclick = () => {
+      index--;
+      if (index === 5) {
+        images[0].style.transform = "translateX(2000px)";
+      }
+      if (index === 0) {
+        images[0].style.transform = "translateX(0)";
+      }
+
+      if (index === -1) {
+        images[4].style.transform = "translateX(-2000px)";
+      }
+      if (index === 4) {
+        images[4].style.transform = "translateX(0)";
+      }
+
+      if (index < -1) {
+        index = 3;
+        banner.style.transition = "none";
+        banner.style.left = -1600 + "px";
+        images[4].style.transform = "translateX(0)";
+        banner.offsetWidth;
+        banner.style.transition = "left 0.3s";
+      }
+      banner.style.left = -index * 400 + "px";
+      buttonPlay();
+    };
+    //切换下一张图片
+
+    next.onclick = () => {
+      index++;
+      if (index === -1) {
+        images[4].style.transform = "translateX(-2000px)";
+      }
+      if (index === 4) {
+        images[4].style.transform = "translateX(0)";
+      }
+
+      if (index === 5) {
+        images[0].style.transform = "translateX(2000px)";
+      }
+      if (index === 0) {
+        images[0].style.transform = "translateX(0)";
+      }
+      if (index > 5) {
+        index = 1;
+        banner.style.transition = "none";
+        banner.style.left = 0;
+        images[0].style.transform = "translateX(0)";
+        banner.offsetWidth;
+        banner.style.transition = "left 0.3s";
+      }
+      banner.style.left = -index * 400 + "px";
+      buttonPlay();
+    };
+
+    //自动轮播
+    timer = setInterval(() => {
+      next.onclick();
+    }, 1000);
+    //鼠标移入移出效果
+    wrap.onmouseover = () => {
+      clearInterval(timer);
+      prev.style.display = "block";
+      next.style.display = "block";
+    };
+    wrap.onmouseout = () => {
+      timer = setInterval(() => {
+        next.onclick();
+      }, 1000);
+      prev.style.display = "none";
+      next.style.display = "none";
+    };
+
+    //圆点效果
+    function buttonPlay() {
+      for (let i = 0; i < lis.length; i++) {
+        if (lis[i].className == "on") {
+          lis[i].classList.remove("on");
+        }
+      }
+      //临界判断
+      if (index == 5) {
+        lis[0].classList.add("on");
+      } else if (index == -1) {
+        lis[4].classList.add("on");
+      } else {
+        lis[index].classList.add("on");
+      }
+    }
+    //点击圆点切换轮播图
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].onclick = function () {
+        index = i;
+        if (index === -1) {
+          images[4].style.transform = "translateX(-2000px)";
+        }
+        if (index === 4) {
+          images[4].style.transform = "translateX(0)";
+        }
+
+        if (index === 5) {
+          images[0].style.transform = "translateX(2000px)";
+        }
+        if (index === 0) {
+          images[0].style.transform = "translateX(0)";
+        }
+        banner.style.left = -i * 400 + "px";
+        buttonPlay();
+      };
+    }
+  </script>
+</html>
